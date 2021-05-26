@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API page</title>
+</head>
+<body>
+    <h2>List of API endpoints:</h2>
+    <ul>
+        {% for endpoint in endpoints %}
+        <li>{{host_url}}{{endpoint}}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
