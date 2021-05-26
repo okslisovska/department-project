@@ -12,10 +12,9 @@ def create_app(config_class=Config):
 
     db.init_app(app)
 
-    from app.api import bp as api_bp
+    from app.api import bp as main_bp
+    from app.main import bp as api_bp
+    app.register_blueprint(main_bp)
     app.register_blueprint(api_bp)
 
     return app
-
-
-from app import routes
