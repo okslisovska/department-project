@@ -5,14 +5,17 @@ from flask import Blueprint, request, url_for, render_template
 bp = Blueprint('main', __name__)
 
 
+def resp_json(url_f):
+    api_url = request.host_url[:-1] + url_for(url_f)
+    resp = requests.get(api_url)
+    return resp.json()
+
+
 @bp.route('/')
 @bp.route('/departments')
 def departments():
-    api_url = request.host_url[:-1] + url_for('api.all_departments')
-    response = requests.get(api_url)
-    departments = response.json()
+    departments = resp_json('api.all_departments')
     return render_template('index.html', departments=departments)
-
 
 ENDPOINTS = ['departments GET', 'employees GET, POST', 'employees/<id> GET, PUT, DELETE']
 
