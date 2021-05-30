@@ -6,6 +6,7 @@ from run import app
 
 DEPARTMENTS_MOCK = [{'name': 'gally'}, {'name': 'hotel'}]
 
+
 class MainViewCase(unittest.TestCase):
     @patch('app.main.resp_json', return_value=DEPARTMENTS_MOCK)
     def test_departments_with_mock(self, mock_db_call):
