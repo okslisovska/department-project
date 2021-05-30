@@ -25,10 +25,10 @@ def get_employee(id):
 def create_employee():
     data = request.json
     employee = Employee(
-        first_name = data['first_name'],
-        last_name = data['last_name'],
-        salary = data['salary'],
-        department_id = data['department_id']
+        first_name=data['first_name'],
+        last_name=data['last_name'],
+        salary=data['salary'],
+        department_id=data['department_id']
     )
     db.session.add(employee)
     db.session.commit()
