@@ -10,7 +10,7 @@
         </tr>
         {% for department in departments %}
         <tr>
-            <td>{{ department['name'] }}</td>
+            <td><a href="{{ url_for('main.department', name=department['name']) }}">{{ department['name'] }}</a></td>
             <td>{{ department['salary_avg'] }}</td>
         </tr>
         {% endfor %}
