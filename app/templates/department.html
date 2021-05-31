@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} {{ name }} {% endblock %}
+
+{% block content %}
+    <h2>Department {{ name }}</h2>
+    <table style="width:30%">
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Salary</th>
+        </tr>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee['first_name'] }}</td>
+            <td>{{ employee['last_name'] }}</td>
+            <td>{{ employee['salary'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

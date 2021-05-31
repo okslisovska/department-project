@@ -1,5 +1,5 @@
 import requests
-from flask import Blueprint, request, url_for, render_template
+from flask import Blueprint, request, url_for, render_template, jsonify
 
 
 bp = Blueprint('main', __name__)
@@ -16,7 +16,14 @@ def resp_json(url_f):
 @bp.route('/departments')
 def departments():
     departments = resp_json('api.all_departments')
-    return render_template('index.html', departments=departments)
+    return render_template('departments.html', departments=departments)
+
+
+@bp.route('/departments/<string:name>')
+def department(name):
+    resp = resp_json('api.all_employees')
+    employees = [employee for employee in resp if employee['department'] == name]
+    return render_template('department.html', name=name, employees=employees)
 
 
 @bp.route('/api')

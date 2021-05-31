@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>API page</title>
-</head>
-<body>
-    <h2>List of API endpoints:</h2>
+{% extends "base.html" %}
+
+{% block title %} API {% endblock %}
+
+{% block content %}
     <ul>
+        <h2>List of API endpoints:</h2>
         {% for endpoint in endpoints %}
         <li>{{host_url}}api/{{endpoint}}</li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}

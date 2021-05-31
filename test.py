@@ -16,6 +16,7 @@ class MainViewCase(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertIn('hotel', str(resp.data))
 
+
     def test_api(self):
         client = app.test_client()
         resp = client.get('/api')
