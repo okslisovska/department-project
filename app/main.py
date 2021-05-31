@@ -3,6 +3,7 @@ from flask import Blueprint, request, url_for, render_template
 
 
 bp = Blueprint('main', __name__)
+ENDPOINTS = ['departments GET', 'employees GET, POST', 'employees/<id> GET, PUT, DELETE']
 
 
 def resp_json(url_f):
@@ -17,10 +18,8 @@ def departments():
     departments = resp_json('api.all_departments')
     return render_template('index.html', departments=departments)
 
-ENDPOINTS = ['departments GET', 'employees GET, POST', 'employees/<id> GET, PUT, DELETE']
 
 @bp.route('/api')
 def api():
     host_url = request.host_url
     return render_template('api.html', host_url=host_url, endpoints=ENDPOINTS)
-

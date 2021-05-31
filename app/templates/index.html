@@ -3,14 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Index page</title>
+    <style>
+        th {
+           text-align: left;
+        }
+    </style>
 </head>
 <body>
-    <h2>List of departments:</h2>
-    <ul>
+    <table style="width:30%">
+        <tr>
+            <th>Department</th>
+            <th>Salary average</th>
+        </tr>
         {% for department in departments %}
-        <li>{{department['name']}}</li>
+        <tr>
+            <td>{{ department['name'] }}</td>
+            <td>{{ department['salary_avg'] }}</td>
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
     <a href="{{url_for('main.api')}}">API</a>
 </body>
 </html>
