@@ -6,12 +6,6 @@ class Department(db.Model):
     name = db.Column(db.String, nullable=False)
     employees = db.relationship('Employee', backref='department', lazy=True)
 
-    @property
-    def salary_avg(self):
-        salaries = [employee.salary for employee in self.employees]
-        average = sum(salaries) // len(salaries)
-        return average
-
     def __repr__(self):
         return f"Department({self.name})"
 
@@ -19,7 +13,6 @@ class Department(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'salary_avg': self.salary_avg
             }
 
 

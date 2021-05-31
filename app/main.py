@@ -16,6 +16,10 @@ def resp_json(url_f):
 @bp.route('/departments')
 def departments():
     departments = resp_json('api.all_departments')
+    employees = resp_json('api.all_employees')
+    for department in departments:
+        salaries = [emp['salary'] for emp in employees if emp['department'] == department['name']]
+        department['salary_avg'] = sum(salaries) // len(salaries)
     return render_template('departments.html', departments=departments)
 
 

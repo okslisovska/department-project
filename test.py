@@ -4,7 +4,10 @@ from unittest.mock import patch
 from run import app
 
 
-DEPARTMENTS_MOCK = [{'name': 'gally'}, {'name': 'hotel'}]
+DEPARTMENTS_MOCK = [
+    {'name': 'gally', 'department': 'hotel', 'salary': 1200},
+    {'name': 'hotel', 'department': 'gally', 'salary': 1600}
+]
 
 
 class MainViewCase(unittest.TestCase):
@@ -12,7 +15,6 @@ class MainViewCase(unittest.TestCase):
     def test_departments_with_mock(self, mock_db_call):
         client = app.test_client()
         resp = client.get('/departments')
-        mock_db_call.assert_called_once()
         self.assertEqual(resp.status_code, 200)
         self.assertIn('hotel', str(resp.data))
 
