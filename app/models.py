@@ -21,6 +21,7 @@ class Employee(db.Model):
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(20), nullable=False)
     salary = db.Column(db.Integer, nullable=False)
+    birthday = db.Column(db.Integer)
     department_id = db.Column(db.Integer, db.ForeignKey('department.id'), nullable=False)
 
     def __repr__(self):
