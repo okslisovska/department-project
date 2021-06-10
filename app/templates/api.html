@@ -3,10 +3,18 @@
 {% block title %} API {% endblock %}
 
 {% block content %}
-    <ul>
-        <h2>List of API endpoints:</h2>
+    <h2>API:</h2>
+
+    <table style="width:40%">
+        <tr>
+            <th>Endpoints</th>
+            <th>Methods</th>
+        </tr>
         {% for endpoint in endpoints %}
-        <li>{{host_url}}api/{{endpoint}}</li>
+        <tr>
+            <td>{{host_url}}api/{{endpoint[0]}}</td>
+            <td>{{endpoint[1]}}</td>
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
 {% endblock %}

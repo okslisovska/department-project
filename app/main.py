@@ -3,11 +3,14 @@ from flask import Blueprint, request, url_for, render_template, jsonify
 
 
 bp = Blueprint('main', __name__)
-ENDPOINTS = ['departments GET', 'employees GET, POST', 'employees/<id> GET, PUT, DELETE']
+ENDPOINTS = [('departments', 'GET'), ('employees', 'GET, POST'), ('employees/<id>', 'GET, PUT, DELETE')]
 
 
-def resp_json(url_f):
-    api_url = request.host_url[:-1] + url_for(url_f)
+def resp_json(endpoint):
+    """
+    aggregate the full path to the specified api endpoint, send request, and return json data from response
+    """
+    api_url = request.host_url[:-1] + url_for(endpoint)
     resp = requests.get(api_url)
     return resp.json()
 
