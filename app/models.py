@@ -21,7 +21,7 @@ class Employee(db.Model):
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(20), nullable=False)
     salary = db.Column(db.Integer, nullable=False)
-    birthday = db.Column(db.Integer)
+    #birthday = db.Column(db.Date)                      # to add after form implementation
     department_id = db.Column(db.Integer, db.ForeignKey('department.id'), nullable=False)
 
     def __repr__(self):
@@ -33,5 +33,6 @@ class Employee(db.Model):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'salary': self.salary,
+            #'birthday': self.birthday,                 # to add after form implementation
             'department': self.department.name
             }
