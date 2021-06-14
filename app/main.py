@@ -6,12 +6,15 @@ bp = Blueprint('main', __name__)
 ENDPOINTS = [('departments', 'GET'), ('employees', 'GET, POST'), ('employees/<id>', 'GET, PUT, DELETE')]
 
 
-def resp_json(endpoint):
+def resp_json(endpoint, method='GET', data=None):
     """
     aggregate the full path to the specified api endpoint, send request, and return json data from response
     """
     api_url = request.host_url[:-1] + url_for(endpoint)
-    resp = requests.get(api_url)
+    if method == 'GET':
+        resp = requests.get(api_url)
+    elif method == 'POST':
+        resp = requests.post(api_url, json=data)
     return resp.json()
 
 
@@ -37,3 +40,12 @@ def department(name):
 def api():
     host_url = request.host_url
     return render_template('api.html', host_url=host_url, endpoints=ENDPOINTS)
+
+
+@bp.route('/add', methods=['GET', 'POST'])
+def create_employee():
+    if request.method == 'POST':
+        data = request.form
+        resp = resp_json('api.create_employee', method='POST', data=data)
+        return render_template('add.html', message=resp["message"])
+    return render_template('add.html', message="")
