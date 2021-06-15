@@ -7,10 +7,10 @@
     <form action="{{ url_for('main.create_employee') }}" method="POST">
         <div>
             <label>First name<input type="text" name="first_name"></label>
-        </div>
+        </div><br>
         <div>
             <label>Last name<input type="text" name="last_name" required></label>
-        </div>
+        </div><br>
          <div>
              <label>Department</label>
              <select name="department_id">                  <!--to update dynamic drop down -->
@@ -18,14 +18,13 @@
                  <option value="2">Casino</option>
                  <option value="3">Spa</option>
              </select>
-         </div>
+         </div><br>
          <div>
             <label>Salary<input type="number" name="salary" min="1"></label>
-        </div>
-            <!--to add after modifying database model-->
-<!--        <div>-->
-<!--            <label>Birthdate<input type="date" name="birthdate"></label>-->
-<!--        </div>-->
+        </div><br>
+        <div>
+            <label>Birthday<input type="date" name="birthday"></label>
+        </div><br>
         <button type="reset">Reset</button>
         <button type="submit">Submit</button>
     </form>

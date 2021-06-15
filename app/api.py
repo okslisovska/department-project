@@ -1,3 +1,4 @@
+from datetime import date
 from flask import Blueprint, jsonify, request
 from app import db
 from app.models import Department, Employee
@@ -28,6 +29,7 @@ def create_employee():
         first_name=data['first_name'],
         last_name=data['last_name'],
         salary=data['salary'],
+        birthday=date.fromisoformat(data['birthday']),
         department_id=data['department_id']
     )
     db.session.add(employee)
