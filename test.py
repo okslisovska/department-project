@@ -12,7 +12,7 @@ DEPARTMENTS_MOCK = [
 
 class MainViewCase(unittest.TestCase):
     @patch('app.main.resp_json', return_value=DEPARTMENTS_MOCK)
-    def test_departments_with_mock(self, mock_db_call):
+    def test_departments_with_mock(self, mock_db_call):            # ? what is mock_db_call for
         client = app.test_client()
         resp = client.get('/departments')
         self.assertEqual(resp.status_code, 200)
@@ -31,10 +31,12 @@ class ApiViewCase(unittest.TestCase):
         resp = client.get('/api/departments')
         self.assertEqual(resp.status_code, 200)
 
+
     def test_all_employees(self):
         client = app.test_client()
         resp = client.get('/api/employees')
         self.assertEqual(resp.status_code, 200)
+
 
     def test_get_employee(self):
         client = app.test_client()
@@ -43,7 +45,24 @@ class ApiViewCase(unittest.TestCase):
         self.assertEqual(resp_ok.status_code, 200)
         self.assertNotEqual(resp_bad.status_code, 200)
 
-    # # this test makes effects on db:
+
+    def test_create_employee_with_mock(self):
+        with patch('app.db.session.add') as session_add_mock, \
+                patch('app.db.session.commit') as session_commit_mock:
+            client = app.test_client()
+            data = {
+                'first_name': 'Mock',
+                'last_name': 'Melnik',
+                'salary': 1700,
+                'birthday': '1996-10-10',
+                'department_id': 1
+            }
+            resp = client.post('/api/employees', data=json.dumps(data), content_type='application/json')
+            session_add_mock.assert_called_once()
+            session_commit_mock.assert_called_once()
+
+
+    # # this test effects db:
     # def test_create_employee_with_db(self):
     #     client = app.test_client()
     #     data = {
@@ -54,20 +73,6 @@ class ApiViewCase(unittest.TestCase):
     #     }
     #     resp = client.post('/api/employees', data=json.dumps(data), content_type='application/json')
     #     self.assertEqual(resp.status_code, 201)
-
-    def test_create_employee_with_mock(self):
-        with patch('app.db.session.add') as session_add_mock, \
-                patch('app.db.session.commit') as session_commit_mock:
-            client = app.test_client()
-            data = {
-                'first_name': 'Mock',
-                'last_name': 'Melnik',
-                'salary': 1700,
-                'department_id': 1
-            }
-            resp = client.post('/api/employees', data=json.dumps(data), content_type='application/json')
-            session_add_mock.assert_called_once()
-            session_commit_mock.assert_called_once()
 
     # # this test makes effects on db
     # def test_delete_employee(self):
