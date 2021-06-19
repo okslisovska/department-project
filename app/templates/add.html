@@ -6,10 +6,10 @@
  <h2>Add an employee:</h2>
     <form action="{{ url_for('main.create_employee') }}" method="POST">
         <div>
-            <label>First name<input type="text" name="first_name" autocomplete="off" required></label>
+            <label>First name <input type="text" name="first_name" autocomplete="off" required></label>
         </div><br>
         <div>
-            <label>Last name<input type="text" name="last_name" autocomplete="off" required></label>
+            <label>Last name <input type="text" name="last_name" autocomplete="off" required></label>
         </div><br>
          <div>
              <label>Department</label>
@@ -20,10 +20,10 @@
              </select>
          </div><br>
          <div>
-            <label>Salary<input type="number" name="salary" min="1"></label>
+            <label>Salary <input type="number" name="salary" min="1"></label>
         </div><br>
         <div>
-            <label>Birthday<input type="date" name="birthday"></label>
+            <label>Birthday <input type="date" name="birthday"></label>
         </div><br>
         <button type="reset">Reset</button>
         <button type="submit">Submit</button>
