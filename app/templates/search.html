@@ -8,10 +8,8 @@
         <div>
             <label> from: <input type="date" name="from"></label>
             <label> till: <input type="date" name="till"></label>
-        </div>
-        <br>
-        <button type="reset">Reset</button>
-        <button type="submit">Submit</button>
+            <button type="submit">Search</button>
+        </div>    
     </form>
     <br>
     {% if employees %}
@@ -32,6 +30,5 @@
             {% endfor %}
         </table>
     {% endif %}
-   
 {% endblock %}
 
