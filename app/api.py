@@ -43,7 +43,7 @@ def update_employee(id):
     employee = Employee.query.get_or_404(id)
     employee.first_name = data['first_name']
     employee.last_name = data['last_name']
-    employee.salary = data['salary']
+    employee.salary = data['salary']                # to add employee.birthday
     employee.department_id = data['department_id']
     db.session.commit()
     return jsonify({'message': 'Updated successfully'})
@@ -55,3 +55,11 @@ def delete_employee(id):
     db.session.delete(employee)
     db.session.commit()
     return jsonify({'message': 'Deleted successfully'}), 204
+
+@bp.route('/employees/search/<string:period>')
+def search_by_birthday(period):
+    start = date.fromisoformat(period[:10])
+    end = date.fromisoformat(period[-10:])
+    employees = Employee.query.filter(Employee.birthday.between(start, end))
+    return jsonify([emp.to_dict() for emp in employees])
+    

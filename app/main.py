@@ -3,7 +3,9 @@ from flask import Blueprint, request, url_for, render_template, jsonify
 
 
 bp = Blueprint('main', __name__)
-ENDPOINTS = [('departments', 'GET'), ('employees', 'GET, POST'), ('employees/<id>', 'GET, PUT, DELETE')]
+
+ENDPOINTS = [('departments', 'GET'), ('employees', 'GET, POST'),\
+             ('employees/<id>', 'GET, PUT, DELETE'), ('search/<period>', 'GET')]
 
 
 def resp_json(endpoint, method='GET', data=None):
@@ -49,3 +51,54 @@ def create_employee():
         resp = resp_json('api.create_employee', method='POST', data=data)
         return render_template('add.html', message=resp["message"])
     return render_template('add.html', message="")
+
+
+@bp.route('/search', methods=['GET', 'POST'])
+def search_by_birthday():
+    employees = []
+    if request.method == 'POST':
+        period = request.form['from'] + request.form['till']
+        api_url = request.host_url.rstrip('/') + \
+                  url_for('api.search_by_birthday', period=period)
+        employees = requests.get(api_url).json()
+    return render_template('search.html', employees=employees)
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

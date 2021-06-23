@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Search employee{% endblock %}
+
+{% block content %}
+ <h2>Search an employee by birthdate:</h2>
+    <form action="{{ url_for('main.search_by_birthday') }}" method="POST">
+        <div>
+            <label> from: <input type="date" name="from"></label>
+            <label> till: <input type="date" name="till"></label>
+        </div>
+        <br>
+        <button type="reset">Reset</button>
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    {% if employees %}
+        <table style="width:40%">
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Birthday</th>
+                <th>Department</th>
+            </tr>
+            {% for emp in employees %}
+            <tr>
+                <td>{{emp.first_name}}</td>
+                <td>{{emp.last_name}}</td>
+                <td>{{emp.birthday}}</td>
+                <td>{{emp.department}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+   
+{% endblock %}
+
